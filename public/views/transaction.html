@@ -4,57 +4,62 @@
     <div class="container" data-ng-if="!hideSNavbar">
       <div class="col-md-6 col-lg-7 text-left">
           <h3 translate>Transaction</h3>
-          <div class="ellipsis"> 
-            <small>{{tx.txid}}</small> 
-            <span class="btn-copy" clip-copy="tx.txid"></span>
+          <div class="ellipsis">
+            <small>{{tx.txid}}</small>
+            <span class="btn-copy" ngclipboard data-clipboard-text="{{tx.txid}}"><img class="clippy" width="13" src="../img/clippy.svg" alt="Copy to clipboard"></span>
           </div>
       </div>
       <div class="col-md-6 col-lg-5 text-right">
         <span data-ng-show="tx.confirmations" class="txvalues
-          txvalues-success">{{tx.confirmations}} 
+          txvalues-success">{{tx.confirmations}}
           <span translate>Confirmations</span>
         </span>
-        <span data-ng-show="!tx.confirmations" 
+        <span data-ng-show="!tx.confirmations"
           class="txvalues txvalues-danger" translate>Unconfirmed Transaction!</span>
-        <span class="txvalues txvalues-primary">{{$root.currency.getConvertion(tx.valueOut)}}</span>
+        <span class="txvalues txvalues-primary">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' SAFE' }}</span>
       </div>
     </div>
     <div class="hide_snavbar">
-      <a href="#" data-ng-click="hideSNavbar=!hideSNavbar">
+      <button class="btn-copy" data-ng-click="hideSNavbar=!hideSNavbar">
         <span data-ng-show="hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-down"></span></span>
         <span data-ng-show="!hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-up"></span></span>
-      </a>
+      </button>
     </div>
   </div>
-  <div data-ng-if="tx.txid">
-    <h1><span translate>Transaction</span> 
-      <small data-ng-show="from_vin || from_vout">
-        <span data-ng-show="from_vin" translate>Input</span> 
-        <span data-ng-show="from_vout" translate>Output</span> 
-        <span>{{v_index}}</span>
-      </small>
-    </h1>
-    <div class="progress progress-striped active" data-ng-if="!tx.txid">
-      <div class="progress-bar progress-bar-info" style="width: 100%">
-        <span translate>Loading Transaction Details</span> <span class="loader-gif"></span>
-      </div>
+  <div class="col-xs-1222 col-md-1222 col-grayy">
+	<h1><span translate>Transaction</span>
+	  <span data-ng-if="tx.txid">
+		<small data-ng-show="from_vin || from_vout">
+			<span data-ng-show="from_vin" translate>Input</span>
+			<span data-ng-show="from_vout" translate>Output</span>
+			<span>{{v_index}}</span>
+		</small>
+	  </span>
+	</h1>
+	<div class="text-muted" data-ng-if="!tx.txid">
+      <span translate>Loading Transaction Details</span> <span class="loader-gif"></span>
     </div>
-    <div data-ng-if="tx.txid">
+	<div data-ng-if="tx.txid">
       <div class="well well-sm ellipsis">
-        <strong translate>Transaction</strong> 
+        <strong translate>Transaction</strong>
         <span class="txid text-muted">{{tx.txid}}</span>
-        <span class="btn-copy" clip-copy="tx.txid"></span>
+        <span class="btn-copy" ngclipboard data-clipboard-text="{{tx.txid}}"><img class="clippy" width="13" src="../img/clippy.svg" alt="Copy to clipboard"></span>
       </div>
-      <h2 translate>Summary</h2>
+	</div>
+  </div>
+  <p style="text-align: center; padding-top: 210px;"><a href="https://zel.network/project/zelcore/download.html" target="_blank"><img src="../img/ZelCoreBannerHeader.png" alt="ZelCore"></a></p>
+	<div data-ng-if="tx.txid">
+      <div class="col-xs-1222 col-md-1222 col-grayy">
+	  <h2 translate>Summary</h2>
       <table class="table" style="table-layout: fixed">
         <tbody>
-        <tr>
+        <tr data-ng-if="tx.size">
           <td><strong translate>Size</strong></td>
           <td class="text-muted text-right">{{tx.size}} (bytes)</td>
         </tr>
         <tr data-ng-show="tx.fees">
           <td><strong translate>Fee Rate</strong></td>
-          <td class="text-muted text-right">{{$root.currency.getConvertion((tx.fees * 1000) / tx.size) + ' per kB'}}</td>
+          <td class="text-muted text-right">{{ ((tx.fees * 1000) / tx.size) | numeraljs : '0.00000000'}} SAFE per kB</td>
         </tr>
         <tr>
           <td><strong translate>Received Time</strong></td>
@@ -68,31 +73,54 @@
         </tr>
         <tr>
           <td><strong translate>Included in Block</strong></td>
-          <td data-ng-show="tx.blockhash" class="text-muted text-right"> 
+          <td data-ng-show="tx.blockhash" class="text-muted text-right">
             <div class="ellipsis">
               <a href="block/{{tx.blockhash}}">{{tx.blockhash}}</a>
             </div>
+          </td>
           <td data-ng-show="!tx.blockhash" class="text-muted text-right">Unconfirmed</td>
         </tr>
         <tr data-ng-show="tx.locktime">
           <td><strong>LockTime</strong></td>
           <td class="text-muted text-right">{{tx.locktime}}</td>
         </tr>
+        <tr data-ng-show="tx.version">
+          <td><strong>Version</strong></td>
+          <td class="text-muted text-right">{{tx.version}}</td>
+        </tr>
+        <tr data-ng-show="tx.fOverwintered">
+          <td><strong>Overwintered</strong></td>
+          <td class="text-muted text-right">{{tx.fOverwintered}}</td>
+        </tr>
+        <tr data-ng-show="tx.fOverwintered">
+          <td><strong>VersionGroupId</strong></td>
+          <td data-ng-show="tx.fOverwintered==true" class="text-muted text-right">
+          0x{{tx.nVersionGroupId.toString(16).padStart(8, "0")}}
+          </td>
+          <td data-ng-show="tx.fOverwintered==false" class="text-muted text-right">N/A</td>
+        </tr>
+        <tr data-ng-show="tx.fOverwintered">
+          <td><strong>Expiry Height</strong></td>
+          <td class="text-muted text-right">{{tx.nExpiryHeight}}</td>
+        </tr>
         <tr data-ng-show="tx.isCoinBase">
           <td><strong>Coinbase</strong></td>
           <td class="text-muted text-right">
             <div class="ellipsis">
-                <span class="btn-copy ng-isolate-scope" clip-copy="tx.vin[0].coinbase"></span>
+                <span class="btn-copy" ngclipboard data-clipboard-text="{{tx.vin[0].coinbase}}"><img class="clippy" width="13" src="../img/clippy.svg" alt="Copy to clipboard"></span>
                 <span class="ng-binding">{{tx.vin[0].coinbase}}</span>
             </div>
           </td>
         </tr>
         </tbody>
       </table>
-    </div>
-    <h2 translate>Details</h2>
-    <div class="block-tx" data-ng-if="tx.txid">
-      <div data-ng-include src="'views/transaction/tx.html'"></div>
-    </div>
+	  </div>
+	</div>
+    <div class="col-xs-1222 col-md-1222 col-grayy">
+		<h2 translate>Details</h2>
+		<div class="block-tx" data-ng-if="tx.txid">
+		  <div data-ng-include src="'views/transaction/tx.html'"></div>
+		</div>
+	</div>
   </div>
 </section>

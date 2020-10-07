@@ -1,0 +1,91 @@
+<div data-ng-include src="'views/includes/connection.html'"></div>
+<div class="box" ng-controller="ChartsController as CC" ng-init="CC.init()">
+	<div class="col-xs-122 col-md-122 col-gray">
+		<div class="heading">
+			<h2 class="heading__title" translate>Safecoin Distribution</h2>
+		</div>
+		<div class="section section-addressesRicher">
+			<div class="section__heading">
+				<h3 class="section__title" translate>Addresses richer than: </h3>
+			</div>
+			<div class="addressesRicher">
+				<table class="table table-hover">
+					<tbody>
+						<tr>
+							<th ng-repeat="interval in CC.richerThanIntervals">{{ interval.amount_usd | numeraljs : '0,0' }} USD</th>
+						</tr>
+						<tr>
+							<td ng-repeat="interval in CC.richerThanIntervals">{{ interval.count_addresses | numeraljs : '0,0' }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="section__heading">
+			<h3 class="section__title">
+				<a class="btn-expand" title="Show/Hide items details" data-ng-click="itemsExpanded = !itemsExpanded">
+					<span class="glyphicon glyphicon-plus-sign" data-ng-class="{'glyphicon-minus-sign': itemsExpanded}"></span>
+				</a>
+				<span translate>Distribution Details:</span>
+			</h3>
+		</div>
+		<div data-ng-if="itemsExpanded"
+			<div class="section section-richList">
+				<table class="table table-hover table-striped">
+					<tbody>
+						<tr>
+							<th translate>Balance</th>
+							<th translate>Addresses</th>
+							<th translate>% Addresses</th>
+							<th translate>Coins</th>
+							<th translate>$USD</th>
+							<th translate>% coins</th>
+						</tr>
+						<tr ng-repeat="interval in CC.balanceIntervals">
+							<td>{{ interval.min | numeraljs : '0,0[.][00000000]'}} - {{ interval.max | numeraljs : '0,0[.][00000000]'}} <small>(SAFE)</small></td>
+							<td>{{ interval.count | numeraljs : '0,0' }}</td>
+							<td>{{ interval.addressesPercent | numeraljs : '0,0[.][00]'}}%</td>
+							<td>{{ interval.sum | numeraljs : '0,0[.][00000000]' }} <small>(SAFE)</small></td>
+							<td>${{ interval.sum * CC.marketsInfo.price | numeraljs : '0,0[.][00]' }} <small>(USD)</small></td>
+							<td>{{ interval.coinsPercent | numeraljs : '0,0[.][00]' }}%</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box" ng-controller="RichListController as RL" ng-init="RL.init()">
+	<div class="col-xs-122 col-md-122 col-gray">
+		<div class="heading margin1">
+			<h1 class="heading__title"> <span translate>Rich List - top 200 addresses</span></h1>
+		</div>
+
+		<div class="section section-adresses">
+			<table class="table table-hover table-striped">
+				<tbody>
+					<tr>
+						<th translate>Rank</th>
+						<th translate>Address</th>
+						<th translate>Balance</th>
+						<th translate>Blocks Mined</th>
+					</tr>
+					<tr ng-repeat="item in RL.items">
+						<td>{{$index + 1}}</td>
+						<td ng-if="item.address == 't3c51GjrkUg7pUiS8bzNdTnW2hD25egWUih'"><a href="/address/{{ item.address }}" class="link mark">Zel Foundation <span style="font-weight:bold">Locked</span></a></td>
+						<td ng-if="item.address == 't1XWTigDqS5Dy9McwQc752ShtZV1ffTMJB3'"><a href="/address/{{ item.address }}" class="link mark">Zel Foundation <span style="font-weight:bold">Operational</span></a></td>
+						<td ng-if="item.address == 't1gZgxSEr9RcMBcUyHvkN1U2bJsz3CEV2Ve'"><a href="/address/{{ item.address }}" class="link mark">Zel Foundation <span style="font-weight:bold">Mining</span></a></td>
+						<td ng-if="item.address == 't1MCAMKMpnQWHsKNjPxquWSwiHCtqYPAZWx'"><a href="/address/{{ item.address }}" class="link mark">Founder <span style="font-weight:bold">Locked</span></a></td>
+						<td ng-if="item.address == 't1S5LnCxPgkwLpZ1qNCt1DanLFfJC5XEcb9'"><a href="/address/{{ item.address }}" class="link mark">Core Team 1 <span style="font-weight:bold">Locked</span></a></td>
+						<td ng-if="item.address == 't1TRUNKQMx1DVzym4d2Ay5E1dudEcHiyk9C'"><a href="/address/{{ item.address }}" class="link mark">Core Team 2 <span style="font-weight:bold">Locked</span></a></td>
+						<td ng-if="item.address == 't1LumiTr49ctV18J2X4dGvKsnVF4Xx9MTeB'"><a href="/address/{{ item.address }}" class="link mark">Core Team 3 <span style="font-weight:bold">Locked</span></a></td>
+						<td ng-if="item.address == 't1TnJpeX9unpQR2rNpMX3GTCkDWbTRiaLpm'"><a href="/address/{{ item.address }}" class="link mark">Core Team 4 <span style="font-weight:bold">Locked</span></a></td>
+						<td ng-if="item.address != 't1TnJpeX9unpQR2rNpMX3GTCkDWbTRiaLpm' && item.address != 't1TnJpeX9unpQR2rNpMX3GTCkDWbTRiaLpm' && item.address != 't1LumiTr49ctV18J2X4dGvKsnVF4Xx9MTeB' && item.address != 't1TRUNKQMx1DVzym4d2Ay5E1dudEcHiyk9C' && item.address != 't1S5LnCxPgkwLpZ1qNCt1DanLFfJC5XEcb9' && item.address != 't1MCAMKMpnQWHsKNjPxquWSwiHCtqYPAZWx' && item.address != 't1XWTigDqS5Dy9McwQc752ShtZV1ffTMJB3' && item.address != 't3c51GjrkUg7pUiS8bzNdTnW2hD25egWUih'"><a href="/address/{{ item.address }}" class="link mark">{{ item.address }}</a></td>   
+						<td>{{ item.balance | numeraljs : '0,0[.][00000000]' }} SAFE</td>
+						<td>{{ item.blocks_mined ? item.blocks_mined : 0 }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

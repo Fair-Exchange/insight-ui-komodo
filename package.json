@@ -1,9 +1,12 @@
 {
   "name": "insight-ui-safecoin",
   "description": "An open-source frontend for the Insight API. The Insight API provides you with a convenient, powerful and simple way to query and broadcast data on the safecoin network and build your own services with it.",
-  "version": "0.4.0",
-  "repository": "git+https://github.com/Fair-Exchange/insight-ui-safecoin.git",
+  "version": "1.2.2",
+  "repository": "git://github.com/OleksandrBlack/insight-ui-safecoin.git",
   "contributors": [
+    {
+      "name": "Under"
+    },
     {
       "name": "Matias Alejo Garcia",
       "email": "ematiu@gmail.com"
@@ -27,12 +30,23 @@
     {
       "name": "Jack Grigg",
       "email": "jack@z.cash"
+    },
+    {
+      "name": "Tadeas Kmenta",
+      "email": "tadeas.kmenta@zel.cash"
+    },
+    {
+      "name": "Simon Liu",
+      "email": "simon@z.cash"
     }
   ],
-  "bugs": {
-    "url": "https://github.com/Fair-Exchange/insight-ui-safecoin/issues"
+  "scripts": {
+    "build": "bower install && grunt compile"
   },
-  "homepage": "https://github.com/Fair-Exchange/insight-ui-safecoin",
+  "bugs": {
+    "url": "https://github.com/OleksandrBlack/insight-ui-safecoin/issues"
+  },
+  "homepage": "https://github.com/OleksandrBlack/insight-ui-safecoin",
   "license": "MIT",
   "keywords": [
     "insight",
@@ -43,19 +57,18 @@
     "front-end"
   ],
   "bitcoreNode": "bitcore-node-safecoin",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "bower": "~1.2.8",
-    "grunt": "~0.4.2",
-    "grunt-cli": "~0.1.11",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.3.2",
+    "bower": "1.8.2",
+    "grunt": "^0.4.2",
+    "grunt-angular-gettext": "0.2.15",
+    "grunt-cli": "0.1.11",
+    "grunt-contrib-concat": "0.3.0",
+    "grunt-contrib-jshint": "0.8.0",
+    "grunt-contrib-uglify": "0.3.2",
     "grunt-contrib-watch": "*",
+    "grunt-css": "0.5.4",
     "grunt-macreload": "*",
-    "grunt-css": "~0.5.4",
-    "grunt-markdown": "~0.5.0",
-    "grunt-angular-gettext": "^0.2.15"
+    "grunt-markdown": "0.5.0"
   }
 }

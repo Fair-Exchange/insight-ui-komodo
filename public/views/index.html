@@ -5,7 +5,7 @@
 <section data-ng-controller="IndexController" data-ng-init="index()">
   <div class="container">
     <div id="home" class="row">
-      <div class="col-xs-12 col-md-8">
+      <div class="col-xs-12 col-md-8 col-gray">
 
         <div id="search-form-mobile" class="visible-xs" data-ng-include src="'views/includes/search.html'"></div>
 
@@ -52,7 +52,7 @@
             <td>
               <a class="ellipsis" href="tx/{{tx.txid}}">{{tx.txid}}</a>
             </td>
-            <td class="text-right"><span class="ellipsis">{{$root.currency.getConvertion(tx.valueOut)}}</span></td>
+            <td class="text-right"><span class="ellipsis">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' ZEL'}}</span></td>
           </tr>
           </tbody>
         </table>
@@ -60,19 +60,41 @@
       </div>
 
       <div class="col-xs-12 col-md-4 col-gray">
-        <h2 translate>What is Safecoin?</h2>
-        <p id="intro" translate><strong>Safecoin</strong> a new and exciting Community driven Komodo fork, aims at being the new standard for cryptocurrency Safety, Security, and Anonymity.</p>
-        <p class="subIntro" translate>Protected by ZCASH zero-knowledge proofs, users can make 100% untraceable transactions</p>
-        <p class="subIntro">Learn more on <a href="https://safecoin.org" target="_blank" title="Safecoin">Safecoin.org</a></p>
-        <p data-ng-if='currency.testnet'><strong>This explorer is currently showing the live Safecoin network!</strong></p>
-        <a class="Discord" href="https://discord.io/safecoin">Visit our growing community on Discord!</a></p>
+        <!--<h2 translate>Brief Info:</h2>
+        <p><span class="ng-scope" translate><strong class="ng-scope"translate>Developers fund</strong> supply: <a href="/address/t3c51GjrkUg7pUiS8bzNdTnW2hD25egWUih" class="link mark">11,000,000 ZEL</a></span></p>
+                <p><strong class="ng-scope" translate><a href="https://zel.cash/charity/"></a>Zel Foundation</a></strong>&nbsp;<span> is an organisation with its own council helping startups and charities. Each year on the 1st of January is allocated 790 000 ZEL for its projects. Consider a donation to fund more projects! <a href="/address/t1XWTigDqS5Dy9McwQc752ShtZV1ffTMJB3">Zel Foundation <strong>Operational</strong> account</a></span></p>
+                <p><strong class="ng-scope" translate><a href="https://zel.cash/charity/">Zel Foundation</a></strong>&nbsp;<span> has set up a <a href="https//pool.zel.cash/">community pool</a> to fight hashrate centralization! <a href="/address/t1gZgxSEr9RcMBcUyHvkN1U2bJsz3CEV2Ve">Zel Foundation <strong>Mining</strong> account</a></span></p>-->
+                <p><a href="https://zel.network/project/zelcore/download.html" target="_blank"><img style="width:100%" src="../img/ZelCoreBanner.png" alt="ZelCore"></a></p>
+                <p class="video-responsive"><iframe src="https://www.youtube.com/embed/FeauNYxEzx4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+                <p><a href="https://zel.network/project/zelflux/" target="_blank"><img style="width:100%" src="../img/ZelFluxBanner.png" alt="ZelFlux"></a></p>
+                               <!--<script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
+        <div class="coinmarketcap-currency-widget" data-currencyid="2577" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>-->
         <div id="powered" class="row">
           <div class="powered-text">
-            <small class="text-muted" translate>Powered by Privacy</small>
+            <small class="text-muted" translate>Follow our project</small>
           </div>
-          <a href="https://en.wikipedia.org/wiki/Right_to_privacy" target="_blank" class="supernet" title="Privacy"></a>
+          <a href="https://twitter.com/Zelcash" target="_blank" class="twitter" title="Twitter"></a>
+          <a href="https://www.reddit.com/r/ZelCash/" target="_blank" class="reddit" title="Reddit"></a>
+          <a href="https://www.youtube.com/channel/UCphbdfb1MXYgUPsdhQPcnGw?view_as=subscriber" target="_blank" class="youtube" title="YouTube"></a>
+          <a href="https://discord.gg/MvBrJB9" target="_blank" class="discord" title="Discord"></a>
         </div>
-      </div> <!-- END OF COL-3 -->
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .video-responsive{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+.video-responsive iframe{
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
+</style>

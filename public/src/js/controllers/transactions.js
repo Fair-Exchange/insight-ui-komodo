@@ -31,9 +31,28 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
 
       // non standard output
       if (items[i].scriptPubKey && !items[i].scriptPubKey.addresses) {
-        items[i].scriptPubKey.addresses = ['Unparsed address [' + u++ + ']'];
-        items[i].notAddr = true;
-        notAddr = true;
+        if (items[i].scriptPubKey.asm.substring(0,9) == 'OP_RETURN') {
+            var possiblemessage = items[i].scriptPubKey.asm;
+            var parts = possiblemessage.split("OP_RETURN ", 2);
+            if (parts[1]) {
+              var encodedMessage = parts[1];
+              var hexx = encodedMessage.toString(); // force conversion
+              var strx = "";
+              for (var k = 0; k < hexx.length && hexx.substr(k, 2) !== "00"; k += 2) {
+                strx += String.fromCharCode(parseInt(hexx.substr(k, 2), 16));
+              }
+              items[i].scriptPubKey.addresses = ['OP_RETURN transaction [' + u++ + ']: ' + strx];
+            } else {
+              items[i].scriptPubKey.addresses = ['OP_RETURN transaction [' + u++ + ']'];
+            }
+            items[i].scriptPubKey.type = "OP_RETURN";
+            items[i].notAddr = true;
+            notAddr = true;
+          } else {
+            items[i].scriptPubKey.addresses = ['Unparsed address [' + u++ + ']'];
+            items[i].notAddr = true;
+            notAddr = true;
+          }
       }
 
       // multiple addr at output

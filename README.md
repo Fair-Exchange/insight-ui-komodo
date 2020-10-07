@@ -1,25 +1,7 @@
 # Insight UI
 
-A Bitcoin blockchain explorer web application service for [Bitcore Node](https://github.com/bitpay/bitcore-node) using the [Insight API](https://github.com/Fair-Exchange/insight-api-safecoin).
+A Ravencoin blockchain explorer web application service for [Bitcore Node Safecoin](https://github.com/OleksandrBlack/bitore-node-safecoin) using the [Insight API](https://github.com/OleksandrBlack/insight-api-safecoin).
 
-## Quick Start
-
-Please see the guide at [https://bitcore.io/guides/full-node](https://bitcore.io/guides/full-node) for information about getting a block explorer running. This is only the front-end component of the block explorer, and is packaged together with all of the necessary components in [Bitcore](https://github.com/bitpay/bitcore).
-
-## Getting Started
-
-To manually install all of the necessary components, you can run these commands:
-
-```bash
-npm install -g git://github.com/Fair-Exchange/bitcore-node-safecoin.git
-bitcore-node create mynode
-cd mynode
-bitcore-node install git://github.com/Fair-Exchange/insight-api-safecoin.git
-bitcore-node install git://github.com/Fair-Exchange/insight-ui-safecoin.git
-bitcore-node start
-```
-
-Open a web browser to `http://localhost:3001/insight/`
 
 ## Development
 
@@ -70,11 +52,11 @@ compile***.
 
 ## Note
 
-For more details about the [Insight API](https://github.com/Fair-Exchange/insight-api-safecoin) configuration and end-points, go to [Insight API GitHub repository](https://github.com/Fair-Exchange/insight-api-safecoin).
+For more details about the [Insight API](https://github.com/OleksandrBlack/insight-api-safecoin) configuration and end-points, go to [Insight API GitHub repository](https://github.com/OleksandrBlack/insight-api-safecoin).
 
 ## Contribute
 
-Contributions and suggestions are welcomed at the [Insight UI GitHub repository](https://github.com/Fair-Exchange/insight-ui-safecoin).
+Contributions and suggestions are welcomed at the [Insight UI GitHub repository](https://github.com/OleksandrBlack/insight-ui-safecoin).
 
 
 ## License

@@ -4,45 +4,61 @@
     <div class="container" data-ng-if="!hideSNavbar">
       <div class="col-md-8 text-left">
           <h3 translate>Address</h3> {{address.addrStr}}
-          <span class="btn-copy" clip-copy="address.addrStr"></span>
+      <span class="btn-copy" ngclipboard data-clipboard-text="{{address.addrStr}}"><img class="clippy" width="13" src="../img/clippy.svg" alt="Copy to clipboard"></span>
+      <span ng-if="address.addrStr == 't3c51GjrkUg7pUiS8bzNdTnW2hD25egWUih'"> Zel Foundation <span style="font-weight:bold">Locked</span></span>
+			<span ng-if="address.addrStr == 't1XWTigDqS5Dy9McwQc752ShtZV1ffTMJB3'"> Zel Foundation <span style="font-weight:bold">Operational</span></span>
+			<span ng-if="address.addrStr == 't1gZgxSEr9RcMBcUyHvkN1U2bJsz3CEV2Ve'"> Zel Foundation <span style="font-weight:bold">Mining</span></span>
+			<span ng-if="address.addrStr == 't1MCAMKMpnQWHsKNjPxquWSwiHCtqYPAZWx'"> Founder <span style="font-weight:bold">Locked</span></span>
+			<span ng-if="address.addrStr == 't1S5LnCxPgkwLpZ1qNCt1DanLFfJC5XEcb9'"> Core Team 1 <span style="font-weight:bold">Locked</span></span>
+			<span ng-if="address.addrStr == 't1TRUNKQMx1DVzym4d2Ay5E1dudEcHiyk9C'"> Core Team 2 <span style="font-weight:bold">Locked</span></span>
+			<span ng-if="address.addrStr == 't1LumiTr49ctV18J2X4dGvKsnVF4Xx9MTeB'"> Core Team 3 <span style="font-weight:bold">Locked</span></span>
+      <span ng-if="address.addrStr == 't1TnJpeX9unpQR2rNpMX3GTCkDWbTRiaLpm'"> Core Team 4 <span style="font-weight:bold">Locked</span></span>
       </div>
       <div class="col-md-4">
-        <span class="txvalues txvalues-primary"><strong translate>Final Balance</strong> {{$root.currency.getConvertion(address.balance)}}</span>
+        <span class="txvalues txvalues-primary"><strong translate>Final Balance</strong> {{$root.currency.getConvertion(address.balance) || address.balance + ' SAFE' }}</span>
       </div>
     </div>
     <div class="hide_snavbar">
-      <a href="#" data-ng-click="hideSNavbar=!hideSNavbar">
+      <button class="btn-copy" data-ng-click="hideSNavbar=!hideSNavbar">
         <span data-ng-show="hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-down"></span></span>
         <span data-ng-show="!hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-up"></span></span>
-      </a>
+      </button>
     </div>
   </div>
-  <h1><span translate>Address</span> <small data-ng-show="address.addrStr">{{$root.currency.getConvertion(address.balance)}}</small></h1>
+  <h1><span translate>Address</span> <small data-ng-show="address.addrStr">{{$root.currency.getConvertion(address.balance) || address.balance + ' SAFE'}}</small></h1>
   <div class="text-muted" data-ng-if="!address.addrStr">
     <span translate>Loading Address Information</span> <span class="loader-gif"></span>
   </div>
   <div data-ng-if="address.addrStr">
     <div class="well well-sm ellipsis">
-      <strong translate>Address</strong> 
+      <strong translate>Address</strong>
       <span class="text-muted">{{address.addrStr}}</span>
-      <span class="btn-copy" clip-copy="address.addrStr"></span>
+      <span class="btn-copy" ngclipboard data-clipboard-text="{{address.addrStr}}"><img class="clippy" width="13" src="../img/clippy.svg" alt="Copy to clipboard"></span>
+      <span ng-if="address.addrStr == 't3c51GjrkUg7pUiS8bzNdTnW2hD25egWUih'"> Zel Foundation <span style="font-weight:bold">Locked</span></span>
+			<span ng-if="address.addrStr == 't1XWTigDqS5Dy9McwQc752ShtZV1ffTMJB3'"> Zel Foundation <span style="font-weight:bold">Operational</span></span>
+			<span ng-if="address.addrStr == 't1gZgxSEr9RcMBcUyHvkN1U2bJsz3CEV2Ve'"> Zel Foundation <span style="font-weight:bold">Mining</span></span>
+			<span ng-if="address.addrStr == 't1MCAMKMpnQWHsKNjPxquWSwiHCtqYPAZWx'"> Founder <span style="font-weight:bold">Locked</span></span>
+			<span ng-if="address.addrStr == 't1S5LnCxPgkwLpZ1qNCt1DanLFfJC5XEcb9'"> Core Team 1 <span style="font-weight:bold">Locked</span></span>
+			<span ng-if="address.addrStr == 't1TRUNKQMx1DVzym4d2Ay5E1dudEcHiyk9C'"> Core Team 2 <span style="font-weight:bold">Locked</span></span>
+			<span ng-if="address.addrStr == 't1LumiTr49ctV18J2X4dGvKsnVF4Xx9MTeB'"> Core Team 3 <span style="font-weight:bold">Locked</span></span>
+      <span ng-if="address.addrStr == 't1TnJpeX9unpQR2rNpMX3GTCkDWbTRiaLpm'"> Core Team 4 <span style="font-weight:bold">Locked</span></span>
     </div>
     <h2 translate>Summary <small>confirmed</small></h2>
     <div class="row" data-ng-hide="!address.addrStr">
-      <div class="col-md-10">
+      <div class="col-md-13">
         <table class="table">
           <tbody>
           <tr>
             <td><strong translate>Total Received</strong></td>
-            <td class="ellipsis text-right">{{$root.currency.getConvertion(address.totalReceived)}}</td>
+            <td class="ellipsis text-right">{{$root.currency.getConvertion(address.totalReceived) || address.totalReceived + ' SAFE'}}</td>
           </tr>
           <tr>
             <td><strong translate>Total Sent</strong></td>
-            <td class="ellipsis text-right">{{$root.currency.getConvertion(address.totalSent)}}</td>
+            <td class="ellipsis text-right">{{$root.currency.getConvertion(address.totalSent) || address.totalSent + ' SAFE'}}</td>
           </tr>
           <tr>
             <td><strong translate>Final Balance</strong></td>
-            <td class="ellipsis text-right">{{$root.currency.getConvertion(address.balance)}}</td>
+            <td class="ellipsis text-right">{{$root.currency.getConvertion(address.balance) || address.balance + ' SAFE'}}</td>
           </tr>
           <tr>
             <td><strong translate>No. Transactions</strong></td>
@@ -56,7 +72,7 @@
       </div>
     </div>
     <div data-ng-show="address.unconfirmedTxApperances">
-      <h3 translate>Unconfirmed</h3>
+      <h2 translate>Unconfirmed</h2>
       <table class="table">
         <tbody>
         <tr>
@@ -72,9 +88,9 @@
       </table>
     </div>
   </div>
+  <br><p style="text-align: center"><a href="https://zel.network/project/zelcore/download.html" target="_blank"><img src="../img/ZelCoreBannerHeader.png" alt="ZelCore"></a></p>
   <div data-ng-if="address.addrStr" data-ng-controller="transactionsController" data-ng-init="load('address')">
     <h2 translate>Transactions</h2>
     <div data-ng-include src="'views/transaction/list.html'" when-scrolled="loadMore()"></div>
   </div>
 </section>
-

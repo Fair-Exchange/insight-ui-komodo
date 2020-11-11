@@ -13,18 +13,18 @@ angular.module('insight.system').controller('FooterController',
     };
 
     $scope.version = _getVersion();
-
+	
     $scope.availableLanguages = [{
-      name: 'Deutsch',
-      isoCode: 'de_DE',
-    }, {
       name: 'English',
       isoCode: 'en',
     }, {
-      name: 'Spanish',
+      name: 'Deutsch',
+      isoCode: 'de_DE',
+    }, {
+      name: 'Español',
       isoCode: 'es',
     }, {
-      name: 'Japanese',
+      name: '⽇本語',
       isoCode: 'ja',
     }, {
       name: 'Українська',
@@ -32,6 +32,9 @@ angular.module('insight.system').controller('FooterController',
     }, {
       name: 'Русский',
       isoCode: 'ru',
+    }, {
+      name: 'Français',
+      isoCode: 'fr_FR',
     }];
 
     $scope.setLanguage = function(isoCode) {
@@ -40,7 +43,7 @@ angular.module('insight.system').controller('FooterController',
       localStorage.setItem('insight-language', isoCode);
       var currentPageTemplate = $route.current.templateUrl;
       $templateCache.remove(currentPageTemplate);
-      $route.reload();
+      location.reload();
     };
 
   });

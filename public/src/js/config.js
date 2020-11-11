@@ -1,7 +1,24 @@
 'use strict';
 
+angular.module('insight')
+  .constant('Constants', {
+
+	CURRENCY: {
+		SAFE : 'SAFE',
+		USD : 'USD',
+		BTC : 'BTC'
+	},
+	BLOCKS_AMOUNT: 15,
+	TRANSACTION_DISPLAYED: 10,
+	BLOCKS_DISPLAYED: 5,
+	CHART_DAYS: 14,
+    NETWORK: window.current_network ? window.current_network : 'livenet',
+    DEFAULT_LANGUAGE: localStorage.getItem('insight-language') || 'en',
+    DEFAULT_CURRENCY: localStorage.getItem('insight-currency') || 'SAFE'
+
+  });
 //Setting up route
-angular.module('insight').config(function($routeProvider) {
+angular.module('insight').config(function ($routeProvider) {
   $routeProvider.
     when('/block/:blockHash', {
       templateUrl: 'views/block.html',
@@ -35,13 +52,45 @@ angular.module('insight').config(function($routeProvider) {
       templateUrl: 'views/address.html',
       title: 'Safecoin Address '
     }).
-    when('/charts/:chartType?', {
+    when('/charts', {
       templateUrl: 'views/charts.html',
       title: 'Charts'
+    }).
+    when('/stats', {
+      templateUrl: 'views/statistics.html',
+      title: 'Stats'
+    }).
+    when('/stats/:type/:days', {
+      controller: 'StatisticsController',
+      templateUrl: 'views/chart.html',
+      title: 'Statistics'
+    }).
+    when('/pools', {
+      controller: 'PoolsController',
+      templateUrl: 'views/pools.html',
+      title: 'Pools'
+    }).
+    when('/pools/:date', {
+      controller: 'PoolsController',
+      templateUrl: 'views/pools.html',
+      title: 'Pools'
     }).
     when('/status', {
       templateUrl: 'views/status.html',
       title: 'Status'
+    }).
+    when('/network', {
+      templateUrl: 'views/network.html',
+      title: 'Network'
+    }).
+    when('/safenodes', {
+      templateUrl: 'views/safenodes.html',
+      title: 'SafeNodes'
+    }).
+    when('/rich-list', {
+      controller: 'RichListController',
+      templateUrl: 'views/rich_list.html',
+      title: 'Rich List'
     }).
     when('/messages/verify', {
       templateUrl: 'views/messages_verify.html',
@@ -55,18 +104,18 @@ angular.module('insight').config(function($routeProvider) {
 
 //Setting HTML5 Location Mode
 angular.module('insight')
-  .config(function($locationProvider) {
+  .config(function ($locationProvider) {
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
   })
-  .run(function($rootScope, $route, $location, $routeParams, $anchorScroll, ngProgress, gettextCatalog, amMoment) {
+  .run(function ($rootScope, $route, $location, $routeParams, $anchorScroll, ngProgress, gettextCatalog, amMoment) {
     gettextCatalog.currentLanguage = defaultLanguage;
     amMoment.changeLocale(defaultLanguage);
-    $rootScope.$on('$routeChangeStart', function() {
+    $rootScope.$on('$routeChangeStart', function () {
       ngProgress.start();
     });
 
-    $rootScope.$on('$routeChangeSuccess', function() {
+    $rootScope.$on('$routeChangeSuccess', function () {
       ngProgress.complete();
 
       //Change page title, based on Route information

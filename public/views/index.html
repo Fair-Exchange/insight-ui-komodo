@@ -5,7 +5,7 @@
 <section data-ng-controller="IndexController" data-ng-init="index()">
   <div class="container">
     <div id="home" class="row">
-      <div class="col-xs-12 col-md-8">
+      <div class="col-xs-12 col-md-8 col-gray">
 
         <div id="search-form-mobile" class="visible-xs" data-ng-include src="'views/includes/search.html'"></div>
 
@@ -43,6 +43,7 @@
           <thead>
             <tr>
               <th>Hash</th>
+              <th></th>
               <th class="text-right" translate>Value Out</th>
             </tr>
           </thead>
@@ -50,9 +51,12 @@
           <tr data-ng-show="!txs.length"><td colspan="3" translate>Waiting for transactions...</td></tr>
           <tr class="fader" data-ng-repeat='tx in txs'>
             <td>
-              <a class="ellipsis" href="tx/{{tx.txid}}">{{tx.txid}}</a>
+				<a class="ellipsis" href="tx/{{tx.txid}}">{{tx.txid}}</a>
             </td>
-            <td class="text-right"><span class="ellipsis">{{$root.currency.getConvertion(tx.valueOut)}}</span></td>
+            <td></td>
+            <td class="text-right">
+				<span class="ellipsis">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' SAFE'}}</span>
+			</td>
           </tr>
           </tbody>
         </table>
@@ -60,19 +64,43 @@
       </div>
 
       <div class="col-xs-12 col-md-4 col-gray">
-        <h2 translate>What is Safecoin?</h2>
-        <p id="intro" translate><strong>Safecoin</strong> a new and exciting Community driven Komodo fork, aims at being the new standard for cryptocurrency Safety, Security, and Anonymity.</p>
-        <p class="subIntro" translate>Protected by ZCASH zero-knowledge proofs, users can make 100% untraceable transactions</p>
-        <p class="subIntro">Learn more on <a href="https://safecoin.org" target="_blank" title="Safecoin">Safecoin.org</a></p>
-        <p data-ng-if='currency.testnet'><strong>This explorer is currently showing the live Safecoin network!</strong></p>
-        <a class="Discord" href="https://discord.io/safecoin">Visit our growing community on Discord!</a></p>
+        <h2><img style="max-height: 89px; display: block; margin-left: auto; margin-right: auto; padding-bottom: 10px;" src="../../img/safecoin_tm.svg" class="brand-logo"></h2>
+        <p style="text-align: center;" translate>Visit our official website <a href="https://safecoin.org">safecoin.org</a></p>
         <div id="powered" class="row">
           <div class="powered-text">
-            <small class="text-muted" translate>Powered by Privacy</small>
+            <small class="text-muted" translate>Safecoin Products</small>
           </div>
-          <a href="https://en.wikipedia.org/wiki/Right_to_privacy" target="_blank" class="supernet" title="Privacy"></a>
+          <a href="https://safe.chat/" target="_blank" class="safechat" title="SafeChat"></a>
+          <a href="https://safe.trade/" target="_blank" class="safetrade" title="SafeTrade"></a>
+          <a href="https://safecoin.org/safenode" target="_blank" class="safenodes" title="SafeNodes"></a>
+          <a href="https://safepay.safecoin.org/" target="_blank" class="safepay" title="SafePay"></a>
+        </div>
+        <div id="powered" class="row">
+          <div class="powered-text">
+            <small class="text-muted" translate>Safecoin Community</small>
+          </div>
+          <a href="https://twitter.com/safecoins" target="_blank" class="twitter" title="Twitter"></a>
+          <a href="https://bitcointalk.org/index.php?topic=2838370" target="_blank" class="bitcointalk" title="Bitcointalk"></a>
+          <a href="https://www.reddit.com/r/SafeCoins/" target="_blank" class="reddit" title="Reddit"></a>
+          <a href="https://discord.gg/c6hWAkQ" target="_blank" class="discord" title="Discord"></a>
         </div>
       </div> <!-- END OF COL-3 -->
     </div>
   </div>
 </section>
+
+<style>
+  .video-responsive{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+.video-responsive iframe{
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
+</style>

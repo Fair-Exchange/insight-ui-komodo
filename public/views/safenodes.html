@@ -1,0 +1,60 @@
+<div data-ng-include src="'views/includes/connection.html'"></div>
+<section>
+<div class="box" data-ng-controller="StatusController" data-ng-init="getActiveNodes()">
+	<div class="col-xs-12 col-md-122 col-gray">
+		<div class="heading margin1 heading-width-900">
+			<h1 class="text-center">
+				<span translate>All SafeNodes:</span>
+			</h1>
+		</div>
+		<table class="table table-hover table-striped">
+			<thead>
+			  <tr>
+				<th class="text-center" translate>Node Count</th>
+				<th class="text-center" translate>Tier 0</th>
+				<th class="text-center" translate>Tier 1</th>
+				<th class="text-center" translate>Tier 2</th>
+				<th class="text-center" translate>Tier 3</th>
+				<th class="text-center" translate>Total Collateral</th>
+			  </tr>
+			</thead>
+			<tbody>
+			<tr data-ng-show="loading">
+			  <td colspan="5"><span translate>Waiting for SafeNodes...</span> <span class="loader-gif"></span></td>
+			</tr>
+			<tr class="fader" data-ng-if="node_count">
+				<td class="text-center">{{node_count}}</td>
+				<td class="text-center">{{tier_0_count}}</td>
+				<td class="text-center">{{tier_1_count}}</td>
+				<td class="text-center">{{tier_2_count}}</td>
+				<td class="text-center">{{tier_3_count}}</td>
+				<td class="text-center">{{$root.currency.getConvertion(collateral_total) || collateral_total + ' SAFE'}}</td>
+			</tr>
+			</tbody>
+		</table>
+		<table class="table table-hover table-striped">
+			<thead>
+			  <tr>
+				<th class="text-left" translate>SAFE Address</th>
+				<th class="text-left" translate>Balance</th>
+				<th class="text-left" translate>Collateral</th>
+				<th class="text-left" translate>Tier</th>
+			  </tr>
+			</thead>
+			<tbody>
+			<tr data-ng-show="loading">
+			  <td colspan="5"><span translate>Waiting for SafeNodes...</span> <span class="loader-gif"></span></td>
+			</tr>
+			<tr class="fader" data-ng-repeat="sn in safenodes | orderBy:'-balance' | orderBy:'-tier'">
+				<td class="text-left"">
+					<a class="ellipsis" href="address/{{sn.SAFE_address}}">{{sn.SAFE_address}}</a>
+				</td>
+				<td class="text-left">{{$root.currency.getConvertion(sn.balance) || sn.balance + ' SAFE'}}</td>
+				<td class="text-left">{{$root.currency.getConvertion(sn.collateral) || sn.collateral + ' SAFE'}}</td>
+				<td class="text-left">{{sn.tier}}</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</section>

@@ -1,9 +1,12 @@
 {
   "name": "insight-ui-safecoin",
+  "url": "git://github.com/Fair-Exchange/insight-ui-safecoin.git",
   "description": "An open-source frontend for the Insight API. The Insight API provides you with a convenient, powerful and simple way to query and broadcast data on the safecoin network and build your own services with it.",
-  "version": "0.4.0",
-  "repository": "git+https://github.com/Fair-Exchange/insight-ui-safecoin.git",
+  "version": "1.1.0",
   "contributors": [
+    {
+      "name": "Fair-Exchange"
+    },
     {
       "name": "Matias Alejo Garcia",
       "email": "ematiu@gmail.com"
@@ -27,8 +30,19 @@
     {
       "name": "Jack Grigg",
       "email": "jack@z.cash"
+    },
+    {
+      "name": "Tadeas Kmenta",
+      "email": "tadeas.kmenta@zel.cash"
+    },
+    {
+      "name": "Simon Liu",
+      "email": "simon@z.cash"
     }
   ],
+  "scripts": {
+    "build": "bower install && grunt compile"
+  },
   "bugs": {
     "url": "https://github.com/Fair-Exchange/insight-ui-safecoin/issues"
   },
@@ -43,10 +57,9 @@
     "front-end"
   ],
   "bitcoreNode": "bitcore-node-safecoin",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "bower": "~1.2.8",
+    "bower": "^1.8.8",
     "grunt": "~0.4.2",
     "grunt-cli": "~0.1.11",
     "grunt-contrib-jshint": "~0.8.0",
